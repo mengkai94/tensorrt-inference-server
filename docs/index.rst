@@ -54,6 +54,7 @@ NVIDIA Triton Inference Server
    run
    client
    client_example
+   client_v2
    models_and_schedulers
    model_repository
    model_configuration

@@ -30,6 +30,11 @@
 NVIDIA Triton Inference Server
 ==============================
 
+    **NEW NAME: We have a new name: Triton Inference Server. Read
+    about why we are making this change and our plans for version 2 of
+    the inference server in** `Roadmap
+    <https://github.com/NVIDIA/tensorrt-inference-server#roadmap>`_.
+
     **LATEST RELEASE: You are currently on the master branch which
     tracks under-development progress towards the next release. The
     latest release of the Triton Inference Server is 1.11.0 and
@@ -122,8 +127,8 @@ corresponds to the 20.02 release of the tensorrtserver container on
 this release is `r20.02
 <https://github.com/NVIDIA/tensorrt-inference-server/tree/r20.02>`_.
 
-Roadmap And Backwards Compatibility
------------------------------------
+Backwards Compatibility
+-----------------------
 
 Continuing in the latest version the following interfaces maintain
 backwards compatibilty with the 1.0.0 release. If you have model
@@ -144,7 +149,7 @@ future 1.x.y releases (see below for exceptions):
   <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/core/grpc_service.proto>`_,
   except as noted below.
 
-* The V1 custom backend interface as defined in `custom.h
+* The V1 and V2 custom backend interfaces as defined in `custom.h
   <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/backends/custom/custom.h>`_.
 
 As new features are introduced they may temporarily have beta status
@@ -158,18 +163,68 @@ following features are in beta:
   is currently in beta and may undergo non-backwards-compatible
   changes.
 
-* The inference server HTTP and GRPC APIs related to system and CUDA
-  shared memory are currently in beta and may undergo
-  non-backwards-compatible changes.
-
-* The V2 custom backend interface as defined in `custom.h
-  <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/backends/custom/custom.h>`_
-  is currently in beta and may undergo non-backwards-compatible
-  changes.
-
 * The C++ and Python client libraries are not stictly included in the
   inference server compatibility guarantees and so should be
   considered as beta status.
+
+Roadmap
+-------
+
+The inference server's new name is Triton Inference Server, which can
+be shortened to just Triton Server in contexts where inferencing is
+already understood. The primary reasons for the name change are to :
+
+* Avoid confusion with the `NVIDIA TensorRT Programmable Inference
+  Accelerator <https://developer.nvidia.com/tensorrt>`_.
+
+* Avoid the perception that Triton Server only supports TensorRT
+  models when in fact the server supports a wide range of model
+  frameworks and formats.
+
+* Highlight that the server is aligning HTTP/REST and GRPC protocols
+  with a set of `community standard inference protocols
+  <https://github.com/kubeflow/kfserving/docs/predict-api/v2>`_ that
+  have been proposed by the `KFServing project
+  <https://github.com/kubeflow/kfserving>`_.
+
+Transitioning from the current protocols (version 1) to the new
+protocols (version 2) will take place over several releases.
+
+* 20.03
+
+  * Change name to Triton Inference Server.
+  * Beta release of server support for community standard GRPC
+    inference protocol.
+  * Beta release of Python client library that uses community standard
+    GRPC inference protocol.
+  * See `client documentation
+    <https://docs.nvidia.com/deeplearning/sdk/tensorrt-inference-server-master-branch-guide/docs/client_v2.html>`_
+    for description and examples showing how to enable and use the new
+    GRPC inference protocol and Python client library.
+  * Existing HTTP/REST and GRPC protocols, and existing client APIs
+    continue to be supported and remain the default protocols.
+
+* 20.05
+
+  * Full release of community standard HTTP/REST and GRPC inference
+    protocol support in server, Python client, and C++ client.
+  * Existing HTTP/REST and GRPC protocols are deprecated but remain
+    the default.
+  * Shared library inferface defined in trtserver.h is deprecated.
+  * New shared library interface is defined in tritonserver.h.
+
+* 20.06
+
+  * Triton Server version 2.0.0.
+  * Community standard HTTP/REST and GRPC inference protocols become
+    the default and only supported protocols for the server.
+  * Original Python and C++ client libraries and examples are removed.
+  * Shared library interface defined in trtserver.h is removed.
+
+Throughout transition the model configuration schema, model repository
+struture, and custom backend APIs will remain unchanged so that any
+existing models, model repository, and custom backends will continue
+to work with Triton Server.
 
 Documentation
 -------------
