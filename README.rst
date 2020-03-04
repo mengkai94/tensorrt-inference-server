@@ -33,13 +33,13 @@ NVIDIA Triton Inference Server
     **NEW NAME: We have a new name: Triton Inference Server. Read
     about why we are making this change and our plans for version 2 of
     the inference server in** `Roadmap
-    <https://github.com/NVIDIA/tensorrt-inference-server#roadmap>`_.
+    <https://github.com/NVIDIA/triton-inference-server#roadmap>`_.
 
     **LATEST RELEASE: You are currently on the master branch which
     tracks under-development progress towards the next release. The
     latest release of the Triton Inference Server is 1.11.0 and
     is available on branch** `r20.02
-    <https://github.com/NVIDIA/tensorrt-inference-server/tree/r20.02>`_.
+    <https://github.com/NVIDIA/triton-inference-server/tree/r20.02>`_.
 
 .. overview-begin-marker-do-not-remove
 
@@ -125,7 +125,7 @@ The current release of the Triton Inference Server is 1.11.0 and
 corresponds to the 20.02 release of the tensorrtserver container on
 `NVIDIA GPU Cloud (NGC) <https://ngc.nvidia.com>`_. The branch for
 this release is `r20.02
-<https://github.com/NVIDIA/tensorrt-inference-server/tree/r20.02>`_.
+<https://github.com/NVIDIA/triton-inference-server/tree/r20.02>`_.
 
 Backwards Compatibility
 -----------------------
@@ -141,16 +141,16 @@ The following inferfaces will maintain backwards compatibility for all
 future 1.x.y releases (see below for exceptions):
 
 * Model configuration as defined in `model_config.proto
-  <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/core/model_config.proto>`_.
+  <https://github.com/NVIDIA/triton-inference-server/blob/master/src/core/model_config.proto>`_.
 
 * The inference server HTTP and GRPC APIs as defined in `api.proto
-  <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/core/api.proto>`_
+  <https://github.com/NVIDIA/triton-inference-server/blob/master/src/core/api.proto>`_
   and `grpc_service.proto
-  <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/core/grpc_service.proto>`_,
+  <https://github.com/NVIDIA/triton-inference-server/blob/master/src/core/grpc_service.proto>`_,
   except as noted below.
 
 * The V1 and V2 custom backend interfaces as defined in `custom.h
-  <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/backends/custom/custom.h>`_.
+  <https://github.com/NVIDIA/triton-inference-server/blob/master/src/backends/custom/custom.h>`_.
 
 As new features are introduced they may temporarily have beta status
 where they are subject to change in non-backwards-compatible
@@ -159,7 +159,7 @@ backwards-compatibility guarantees described above. Currently the
 following features are in beta:
 
 * The inference server library API as defined in `trtserver.h
-  <https://github.com/NVIDIA/tensorrt-inference-server/blob/master/src/core/trtserver.h>`_
+  <https://github.com/NVIDIA/triton-inference-server/blob/master/src/core/trtserver.h>`_
   is currently in beta and may undergo non-backwards-compatible
   changes.
 
@@ -246,7 +246,7 @@ provides answers for frequently asked questions.
 
 READMEs for deployment examples can be found in subdirectories of
 deploy/, for example, `deploy/single_server/README.rst
-<https://github.com/NVIDIA/tensorrt-inference-server/tree/master/deploy/single_server/README.rst>`_.
+<https://github.com/NVIDIA/triton-inference-server/tree/master/deploy/single_server/README.rst>`_.
 
 The `Release Notes
 <https://docs.nvidia.com/deeplearning/sdk/inference-release-notes/index.html>`_
