@@ -42,7 +42,6 @@ VERIFY_TIMESTAMPS=verify_timestamps.py
 DATADIR=${DATADIR:="/data/inferenceserver/${REPO_VERSION}"}
 OPTDIR=${OPTDIR:="/opt"}
 SERVER=${OPTDIR}/tensorrtserver/bin/trtserver
-JETSON=${JETSON:="0"}
 
 source ../common/util.sh
 
@@ -58,8 +57,8 @@ export CUDA_VISIBLE_DEVICES=0
 # Setup non-variable-size model repository
 rm -fr *.log *.serverlog models && mkdir models
 for BACKEND in $BACKENDS; do
-    if [ "$BACKEND" == "plan" -a "$JETSON" == "1" ]; then
-      TMP_MODEL_DIR="${DATADIR}_jetson/qa_model_repository/${BACKEND}_float32_float32_float32"
+    if [ "$BACKEND" == "plan" -a -n "$REPO_ARCH" ]; then
+      TMP_MODEL_DIR="${DATADIR}_${REPO_ARCH}/qa_model_repository/${BACKEND}_float32_float32_float32"
     elif [ "$BACKEND" != "custom" ]; then
       TMP_MODEL_DIR="$DATADIR/qa_model_repository/${BACKEND}_float32_float32_float32"
     else
@@ -77,7 +76,7 @@ done
 rm -fr var_models && mkdir var_models
 for BACKEND in $BACKENDS; do
     if [ "$BACKEND" == "plan" -a "$JETSON" == "1" ]; then
-      TMP_MODEL_DIR="${DATADIR}_jetson/qa_variable_model_repository/${BACKEND}_float32_float32_float32"
+      TMP_MODEL_DIR="${DATADIR}_${REPO_ARCH}/qa_variable_model_repository/${BACKEND}_float32_float32_float32"
     elif [ "$BACKEND" != "custom" ]; then
       TMP_MODEL_DIR="$DATADIR/qa_variable_model_repository/${BACKEND}_float32_float32_float32"
     else

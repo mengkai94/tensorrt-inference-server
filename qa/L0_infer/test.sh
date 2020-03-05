@@ -44,7 +44,6 @@ MODELDIR=`pwd`/models
 DATADIR=${DATADIR:="/data/inferenceserver/${REPO_VERSION}"}
 OPTDIR=${OPTDIR:="/opt"}
 SERVER=${OPTDIR}/tensorrtserver/bin/trtserver
-JETSON=${JETSON:="0"}
 
 # Allow more time to exit. Ensemble brings in too many models
 SERVER_ARGS="--model-repository=${MODELDIR} --exit-timeout-secs=120"
@@ -87,8 +86,8 @@ for TARGET in cpu gpu; do
 
     rm -fr models && mkdir models
     for BACKEND in $BACKENDS; do
-      if [ "$BACKEND" == "plan" -a "$JETSON" == "1" ]; then
-        cp -r ${DATADIR}_jetson/qa_model_repository/${BACKEND}* models/.
+      if [ "$BACKEND" == "plan" -a -n "${REPO_ARCH}" ]; then
+        cp -r ${DATADIR}_${REPO_ARCH}/qa_model_repository/${BACKEND}* models/.
       elif [ "$BACKEND" != "custom" ]; then
         cp -r ${DATADIR}/qa_model_repository/${BACKEND}* models/.
       else

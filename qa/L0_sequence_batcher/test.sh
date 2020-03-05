@@ -41,7 +41,6 @@ BATCHER_TEST=sequence_batcher_test.py
 DATADIR=${DATADIR:="/data/inferenceserver/${REPO_VERSION}"}
 OPTDIR=${OPTDIR:="/opt"}
 SERVER=${OPTDIR}/tensorrtserver/bin/trtserver
-JETSON=${JETSON:="0"}
 
 source ../common/util.sh
 
@@ -83,8 +82,8 @@ for BACKEND in $BACKENDS; do
   else
     DTYPE=$(get_datatype $BACKEND)
 
-    if [ "$BACKEND" == "plan" -a "$JETSON" == "1" ]; then
-      MODELS="$MODELS ${DATADIR}_jetson/qa_sequence_model_repository/${BACKEND}_sequence_${DTYPE}"
+    if [ "$BACKEND" == "plan" -a -n "${REPO_ARCH}" ]; then
+      MODELS="$MODELS ${DATADIR}_${REPO_ARCH}/qa_sequence_model_repository/${BACKEND}_sequence_${DTYPE}"
     else
       MODELS="$MODELS $DATADIR/qa_sequence_model_repository/${BACKEND}_sequence_${DTYPE}"
     fi
@@ -124,8 +123,8 @@ for BACKEND in $BACKENDS; do
   else
     DTYPE=$(get_datatype $BACKEND)
 
-    if [ "$BACKEND" == "plan" -a "$JETSON" == "1" ]; then
-      MODELS="$MODELS ${DATADIR}_jetson/qa_sequence_model_repository/${BACKEND}_nobatch_sequence_${DTYPE}"
+    if [ "$BACKEND" == "plan" -a -n "${REPO_ARCH}" ]; then
+      MODELS="$MODELS ${DATADIR}_${REPO_ARCH}/qa_sequence_model_repository/${BACKEND}_nobatch_sequence_${DTYPE}"
     else
       MODELS="$MODELS $DATADIR/qa_sequence_model_repository/${BACKEND}_nobatch_sequence_${DTYPE}"
     fi
@@ -161,8 +160,8 @@ for BACKEND in $BACKENDS; do
   else
     DTYPE=$(get_datatype $BACKEND)
 
-    if [ "$BACKEND" == "plan" -a "$JETSON" == "1" ]; then
-      MODELS="$MODELS ${DATADIR}_jetson/qa_variable_sequence_model_repository/${BACKEND}_sequence_${DTYPE}"
+    if [ "$BACKEND" == "plan" -a -n "${REPO_ARCH}" ]; then
+      MODELS="$MODELS ${DATADIR}_${REPO_ARCH}/qa_variable_sequence_model_repository/${BACKEND}_sequence_${DTYPE}"
     else
       MODELS="$MODELS $DATADIR/qa_variable_sequence_model_repository/${BACKEND}_sequence_${DTYPE}"
     fi
